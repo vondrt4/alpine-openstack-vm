@@ -1,9 +1,0 @@
-{
-    "editor.formatOnSave": true,
-    "editor.formatOnSaveMode": "file",
-    "editor.renderWhitespace": "boundary",
-    "editor.rulers": [
-        80,
-        120
-    ]
-}
