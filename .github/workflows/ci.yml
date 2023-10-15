@@ -29,6 +29,7 @@ jobs:
               --image-size 1G \
               --repositories-file openstack/repositories \
               --packages "$(cat openstack/packages)" \
+              --serial-console \
               --script-chroot \
               alpine-openstack.qcow2 -- ./openstack/configure.sh
           sha256sum alpine-openstack.qcow2 > SHA256SUMS
