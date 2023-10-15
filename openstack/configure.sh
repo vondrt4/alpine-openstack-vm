@@ -8,10 +8,7 @@ step() {
 
 
 step 'Set up timezone'
-setup-timezone -z Europe/Paris
-
-step 'Set up keymap'
-setup-keymap fr fr-azerty
+setup-timezone -z Europe/Prague
 
 step 'Set up networking'
 cat > /etc/network/interfaces <<-EOF
@@ -25,17 +22,11 @@ EOF
 # FIXME: remove root and alpine password
 step 'Set cloud configuration'
 sed -e '/disable_root:/ s/true/false/' \
-	-e '/ssh_pwauth:/ s/0/no/' \
+    -e '/ssh_pwauth:/ s/0/no/' \
     -e '/name: alpine/a \     passwd: "*"' \
     -e '/lock_passwd:/ s/True/False/' \
     -e '/shell:/ s#/bin/ash#/bin/zsh#' \
     -i /etc/cloud/cloud.cfg
-
-# To have oh-my-zsh working on first boot
-cat >> /etc/cloud/cloud.cfg <<EOF
-runcmd:
-    - su alpine -l -c 'cp -f /usr/share/oh-my-zsh/templates/zshrc.zsh-template /home/alpine/.zshrc'
-EOF
 
 step 'Allow only key based ssh login'
 sed -e '/PermitRootLogin yes/d' \
@@ -56,11 +47,6 @@ sed -Ei \
 	-e 's/^[# ](rc_logger)=.*/\1=YES/' \
 	-e 's/^[# ](unicode)=.*/\1=YES/' \
 	/etc/rc.conf
-
-step 'Enabling zsh'
-cp -f /usr/share/oh-my-zsh/templates/zshrc.zsh-template /root/.zshrc
-chmod +x /root/.zshrc
-sed -ie '/^root:/ s#:/bin/.*$#:/bin/zsh#' /etc/passwd
 
 # see https://gitlab.alpinelinux.org/alpine/aports/-/issues/8861
 step 'Enable cloud-init configuration via NoCloud iso image'
