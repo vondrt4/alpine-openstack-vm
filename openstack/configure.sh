@@ -20,18 +20,16 @@ cat > /etc/network/interfaces <<-EOF
 	    udhcpc_opts -O staticroutes
 EOF
 
-# FIXME: remove root and alpine password
 step 'Set cloud configuration'
-sed -e '/disable_root:/ s/true/false/' \
-    -e '/ssh_pwauth:/ s/0/no/' \
+#sed -e '/disable_root:/ s/true/false/' \
+sed -e '/ssh_pwauth:/ s/0/no/' \
     -e '/name: alpine/a \     passwd: "*"' \
     -e '/lock_passwd:/ s/True/False/' \
-    -e '/shell:/ s#/bin/ash#/bin/zsh#' \
     -i /etc/cloud/cloud.cfg
 
 step 'Allow only key based ssh login'
-sed -e '/PermitRootLogin yes/d' \
-    -e 's/^#PasswordAuthentication yes/PasswordAuthentication no/' \
+#sed -e '/PermitRootLogin yes/d' \
+sed -e 's/^#PasswordAuthentication yes/PasswordAuthentication no/' \
     -e 's/^#PubkeyAuthentication yes/PubkeyAuthentication yes/' \
     -i /etc/ssh/sshd_config
 
