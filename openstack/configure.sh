@@ -17,6 +17,7 @@ cat > /etc/network/interfaces <<-EOF
 
 	auto eth0
 	iface eth0 inet dhcp
+	    udhcpc_opts -O staticroutes
 EOF
 
 # FIXME: remove root and alpine password
