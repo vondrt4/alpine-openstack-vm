@@ -23,7 +23,7 @@ EOF
 step 'Set cloud configuration'
 #sed -e '/disable_root:/ s/true/false/' \
 sed -e '/ssh_pwauth:/ s/0/no/' \
-    -e '/name: alpine/a \     passwd: "*"' \
+    -e '/name: alpine/a \    passwd: "*"' \
     -e '/lock_passwd:/ s/True/False/' \
     -i /etc/cloud/cloud.cfg
 
