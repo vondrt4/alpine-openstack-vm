@@ -24,7 +24,7 @@ jobs:
             && echo '2720b23e4c65aff41a3ab781a26467b66985c526 alpine-make-vm-image' | sha1sum -c \
             || exit 1
           chmod +x ./alpine-make-vm-image
-	  if command -v sudo >/dev/null 2>&1; then
+          if command -v sudo >/dev/null 2>&1; then
             ELEVATE="sudo"
           elif command -v doas >/dev/null 2>&1; then
             ELEVATE="doas"
