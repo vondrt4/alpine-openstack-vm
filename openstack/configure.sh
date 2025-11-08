@@ -59,6 +59,8 @@ rc-update add crond default
 rc-update add networking boot
 rc-update add termencoding boot
 rc-update add sshd default
+rc-update add cloud-init-ds-identify default
+rc-update add cloud-init-local default
 rc-update add cloud-init default
 rc-update add cloud-config default
 rc-update add cloud-final default
